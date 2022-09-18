@@ -10,10 +10,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { AddShoppingCart } from '@mui/icons-material'
+import { AddShoppingCart, Login, Logout } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import useBucket from '../contexts/useBucket'
 import { Badge } from '@mui/material'
+import useUser from '../contexts/useUser'
+import { Config } from '../setup'
 
 const pages = [
   {name: 'Produkty', route: 'products'},
@@ -24,6 +26,7 @@ const pages = [
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const {bucket} = useBucket();
+  const {user} = useUser();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -116,6 +119,29 @@ const ResponsiveAppBar = () => {
               </Badge>
             </Tooltip>
           </Box>
+          {user.isLoggedIn ?
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Logout">
+                <IconButton
+                  sx={{ p: 0 }}
+                  href={Config.api_url + "/logout"}
+                >
+                  <Logout />
+                </IconButton>
+              </Tooltip>
+            </Box>
+            :
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Login">
+                <IconButton
+                  sx={{ p: 0 }}
+                  href={Config.api_url + "/login"}
+                >
+                  <Login />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          }
         </Toolbar>
       </Container>
     </AppBar>

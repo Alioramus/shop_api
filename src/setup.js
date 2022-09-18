@@ -1,3 +1,3 @@
 export const Config = {
-  api_url: 'http://localhost:3000'
+  api_url: 'https://shop-api-ebiznes-1234.azurewebsites.net'
 }

@@ -6,6 +6,8 @@ import axios from 'axios'
 import useBucket from '../contexts/useBucket'
 import { useSearchParams } from 'react-router-dom'
 import { Config } from '../setup'
+import useUser from '../contexts/useUser'
+import { Button } from '@mui/material'
 
 const ItemList = styled(Grid)(({theme}) => ({
   ...theme.typography.body2,
@@ -17,6 +19,7 @@ let ProductsList = () => {
   const [error, setError] = useState(null)
   const {addProduct} = useBucket()
   const [searchParams,] = useSearchParams()
+  const {user} = useUser()
 
   useEffect(() => {
     setIsLoading(true)
@@ -45,6 +48,7 @@ let ProductsList = () => {
           </Grid>
         )}
       </ItemList>}
+      {user.isAdmin && <Button>Add product</Button>}
     </>
 )
 }
