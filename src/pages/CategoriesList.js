@@ -29,8 +29,8 @@ let CategoriesList = () => {
       {!isLoading && !error &&
       <div>
         {categories.map(category =>
-          <Button key={category} component={Link} to={"/products?category=" + category}>
-            {category}
+          <Button key={category.id} component={Link} to={"/products?category=" + category.id}>
+            {category.name + ": " + category.description}
           </Button>)}
       </div>
       }

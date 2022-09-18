@@ -2,7 +2,7 @@ import { Card, CardActions, CardContent, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useState } from 'react'
 
-const Product = ({product, onBuy}) => {
+const Product = ({product, canRemove, onBuy, onRemove}) => {
   const [amount, setAmount] = useState(1)
 
   return (
@@ -22,6 +22,7 @@ const Product = ({product, onBuy}) => {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={() => onBuy(product, amount)}>Dodaj do koszyka</Button>
+        {canRemove &&<Button size="small" onClick={() => onRemove(product, amount)}>Usuń przedmiot</Button>}
       </CardActions>
     </Card>
   )
