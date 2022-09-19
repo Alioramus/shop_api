@@ -3,9 +3,12 @@ services:
     image: shopebiznes123.azurecr.io/shop-api:latest
     ports:
       - 3000:8080
+    environment:
+      - APP_URL=http://localhost:8080
   app:
-    image: shopebiznes123.azurecr.io/shop-app:latest
+    build:
+      context: .
+      args:
+        API_URL: http://localhost:3000
     ports:
       - 8080:80
-    environment:
-      - API_URL=http://localhost:3000/

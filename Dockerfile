@@ -1,6 +1,8 @@
 # build environment
 FROM node:13.12.0-alpine as build
 WORKDIR /app
+ARG API_URL
+ENV API_URL=$API_URL
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
@@ -11,8 +13,6 @@ RUN npm run build
 
 # production environment
 FROM nginx:stable-alpine
-ARG API_URL
-ENV API_URL=$API_URL
 COPY --from=build /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
