@@ -11,6 +11,8 @@ RUN npm run build
 
 # production environment
 FROM nginx:stable-alpine
+ARG API_URL
+ENV API_URL=$API_URL
 COPY --from=build /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80

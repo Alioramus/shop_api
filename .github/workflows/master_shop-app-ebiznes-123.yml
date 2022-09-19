@@ -32,3 +32,5 @@ jobs:
           push: true
           tags: shopebiznes123.azurecr.io/shop-app:latest
           file: ./Dockerfile
+          build-args: |
+            API_URL=${{ secrets.API_URL }}

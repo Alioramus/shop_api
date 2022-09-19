@@ -1,3 +1,3 @@
 export const Config = {
-  api_url: 'https://shop-app-ebiznes-123.azurewebsites.net/api'
+  api_url: process.env.API_URL || 'http://localhost:8080'
 }
