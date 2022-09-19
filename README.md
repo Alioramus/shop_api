@@ -1,3 +1,5 @@
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Alioramus_shop_api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Alioramus_shop_api)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

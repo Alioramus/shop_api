@@ -20,6 +20,7 @@ import { Config } from '../setup'
 const pages = [
   {name: 'Produkty', route: 'products'},
   {name: 'Kategorie', route: 'categories'},
+  {name: 'Promocje', route: 'promotions'},
   {name: 'Zamówienia', route: 'orders'}
 ];
 

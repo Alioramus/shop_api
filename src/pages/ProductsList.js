@@ -25,7 +25,6 @@ const ItemList = styled(Grid)(({theme}) => ({
 }))
 let ProductsList = () => {
   const [products, setProducts] = useState([])
-  const [categories, setCategories] = useState({})
   const [categoriesList, setCategoriesList] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -59,8 +58,6 @@ let ProductsList = () => {
     axios(
       Config.api_url + '/categories',
     ).then(result => {
-      const test = new Map(result.data.map(i => [i.id, i.name]))
-      setCategories(test)
       setCategoriesList(result.data)
     }).catch(reson => {
       setError(reson)

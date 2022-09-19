@@ -11,9 +11,11 @@ const ProductRead = ({product, onRemove}) => {
         <p>Ilość: {product.amount}</p>
         <p>Cena: {product.amount * product.price}</p>
       </CardContent>
+      {onRemove &&
       <CardActions>
         <Button onClick={onRemove}>Usuń</Button>
       </CardActions>
+      }
     </Card>
   )
 }

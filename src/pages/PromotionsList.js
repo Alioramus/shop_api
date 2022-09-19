@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Button from '@mui/material/Button'
-import { Link } from 'react-router-dom'
 import { Config } from '../setup'
 import useUser from '../contexts/useUser'
 import { TextField } from '@mui/material'
 
-let CategoriesList = () => {
-  const [categories, setCategories] = useState([])
+let PromotionsList = () => {
+  const [promotions, setPromotions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [refresh, setRefresh] = useState(false)
   const [error, setError] = useState(null)
@@ -18,9 +17,9 @@ let CategoriesList = () => {
   useEffect(() => {
     setIsLoading(true)
     axios(
-      Config.api_url + '/categories'
+      Config.api_url + '/promotions'
     ).then(result => {
-      setCategories(result.data)
+      setPromotions(result.data)
       setIsLoading(false)
       setRefresh(false)
     }).catch(reson => {
@@ -29,8 +28,8 @@ let CategoriesList = () => {
     })
   }, [refresh])
 
-  const addCategory = () => {
-    axios.post(Config.api_url + "/categories", {name: newName, description: newDescription}).then(result => {
+  const addPromotion = () => {
+    axios.post(Config.api_url + "/promotions", {name: newName, description: newDescription}).then(result => {
       setNewName("")
       setNewDescription("")
       setRefresh(true)
@@ -39,15 +38,15 @@ let CategoriesList = () => {
 
   return (
     <>
-      <h2>Categories</h2>
+      <h2>Promotions</h2>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {!isLoading && !error &&
       <div>
-        {categories.map(category =>
-          <Button key={category.id} component={Link} to={"/products?category=" + category.id}>
-            {category.name + ": " + category.description}
-          </Button>)}
+        {promotions.map(promotion =>
+          <div><h3 key={promotion.id}>
+            {promotion.name + ": " + promotion.description}
+          </h3></div>)}
       </div>
       }
       {user.isAdmin && <div>
@@ -71,9 +70,9 @@ let CategoriesList = () => {
           value={newDescription}
           onChange={event => setNewDescription(event.target.value)}
         />
-        <Button onClick={addCategory}>Dodaj</Button>
+        <Button onClick={addPromotion}>Dodaj</Button>
       </div>}
     </>
   )
 }
-export default CategoriesList
+export default PromotionsList

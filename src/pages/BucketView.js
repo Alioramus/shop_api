@@ -1,14 +1,16 @@
 import useBucket from '../contexts/useBucket'
-import { Button, Snackbar, TextareaAutosize, TextField } from '@mui/material'
+import { Button, Snackbar, TextareaAutosize } from '@mui/material'
 import ProductRead from '../components/ProductRead'
 import axios from 'axios'
 import { useState } from 'react'
 import { Config } from '../setup'
+import useUser from '../contexts/useUser'
 
 let BucketView = () => {
   const {bucket, removeProduct} = useBucket()
   const [snackbarMsg, setSnackbarMsg] = useState(null);
   const [deliveryAddress, setDeliveryAddress] = useState("")
+  const {user} = useUser()
 
   const getBucketValue = () => {
     let value = 0
@@ -18,11 +20,10 @@ let BucketView = () => {
 
   const confirmOrder = () => {
     axios.post(Config.api_url + '/orders', {
-      products: Object.values(bucket).map(product => product.id),
-      price: getBucketValue(),
+      products: Object.values(bucket).map(({id, amount}) => ({productId: id, amount: amount})),
       deliveryAddress: deliveryAddress
     }).then(
-      setSnackbarMsg('Zamówienie potwierdzone!')
+      setSnackbarMsg('Zamówienie potwierdzone! Przejdź do listy zamówień aby opłacić.')
     ).catch((err) => {
       setSnackbarMsg('Zamówienie nieudane. Proszę spróbuj ponownie.')
     })
@@ -56,7 +57,7 @@ let BucketView = () => {
           onChange={event => setDeliveryAddress(event.target.value)}
         />
       </div>
-      <Button onClick={handleOrderClick}>Zatwierdź zamówienie</Button>
+      {user.isLoggedIn ? <Button onClick={handleOrderClick}>Zatwierdź zamówienie</Button> : <p>Zaloguj się, aby złozyć zamówienie.</p>}
       <h3>Produkty</h3>
       {Object.values(bucket).map(product => (
         <>

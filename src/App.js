@@ -8,6 +8,8 @@ import BucketProvider from './contexts/BucketContext'
 import OrdersList from './pages/OrdersList'
 import UserProvider from './contexts/UserContext'
 import axios from 'axios'
+import LoggedInOnly from './components/LoggedInOnly'
+import PromotionsList from './pages/PromotionsList'
 
 axios.defaults.withCredentials = true
 
@@ -21,7 +23,8 @@ function App() {
             <Route path="/" element={<ProductsList/>}/>
             <Route path="/products" element={<ProductsList/>}/>
             <Route path="/categories" element={<CategoriesList/>}/>
-            <Route path="/orders" element={<OrdersList/>}/>
+            <Route path="/promotions" element={<PromotionsList/>}/>
+            <Route path="/orders" element={<LoggedInOnly><OrdersList/></LoggedInOnly>}/>
             <Route path="/bucket" element={<BucketView/>}/>
           </Routes>
         </BucketProvider>
