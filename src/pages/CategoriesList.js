@@ -39,7 +39,7 @@ let CategoriesList = () => {
 
   return (
     <>
-      <h2>Categories</h2>
+      <h2>Kategorie</h2>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {!isLoading && !error &&

@@ -38,7 +38,7 @@ let PromotionsList = () => {
 
   return (
     <>
-      <h2>Promotions</h2>
+      <h2>Promocje</h2>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {!isLoading && !error &&
